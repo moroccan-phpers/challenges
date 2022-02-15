@@ -1,0 +1,24 @@
+{
+    "name": "bondif/mail-delivery-service",
+    "authors": [
+        {
+            "name": "Mohamed Boukhlif",
+            "email": "boukhlifmohamed13@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Bondif\\MailDeliveryService\\": "src/App"
+        }
+    },
+    "require": {
+        "rakit/validation": "^1.4",
+        "ramsey/uuid": "^4.2",
+        "rybakit/phive-queue": "^0.12.0"
+    },
+    "config": {
+        "platform": {
+            "ext-pcntl": "8.0"
+        }
+    }
+}

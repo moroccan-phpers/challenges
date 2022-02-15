@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  www:
+    build:
+      context: .
+    links:
+      - db
+    ports:
+      - 8000:80
+    volumes:
+      - ./webserver:/etc/apache2/sites-enabled/
+    depends_on:
+      - db
+      - redis
+    restart: always
+
+  db:
+    image: mariadb:10.7.1
+    container_name: mariadbMailDeliveryService
+    environment:
+      MYSQL_DATABASE: mail_delivery_service
+      MYSQL_USER: user
+      MYSQL_PASSWORD: strong_password
+      MYSQL_ALLOW_EMPTY_PASSWORD: "true"
+    volumes:
+      - ./dump:/docker-entrypoint-initdb.d
+      - ./mysql:/var/lib/mysql
+    restart: always
+
+  redis:
+    image: redis:7.0-rc1-alpine
+    container_name: redisMailDeliveryService
+    ports:
+      - 6379:6379
+    restart: always
